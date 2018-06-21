@@ -1,0 +1,22 @@
+{
+  "name": "prankstr",
+  "description": "",
+  "author": "Kevin Restaino <kevinrestaino@gmail.com>",
+  "homepage": "https://prankstr.kmr.io",
+  "version": "1.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/krestaino/prankstr.git"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "connect-history-api-fallback": "^1.5.0",
+    "cors": "^2.8.4",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "express-rate-limit": "^2.11.0"
+  }
+}
