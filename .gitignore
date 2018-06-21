@@ -8,6 +8,7 @@ yarn-debug.log*
 yarn-error.log*
 Thumbs.db
 .env
+keyfile.json
 
 # local env files
 .env.local

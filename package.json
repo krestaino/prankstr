@@ -13,6 +13,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@google-cloud/text-to-speech": "^0.2.0",
     "connect-history-api-fallback": "^1.5.0",
     "cors": "^2.8.4",
     "dotenv": "^6.0.0",
