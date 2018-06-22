@@ -23,9 +23,8 @@ app.use(limiter)
 // express routes
 app.use(api)
 
-// serve compiled vue app at http://localhost/
-app.use(express.static('mp3'))
-app.use(express.static('xml'))
+app.use('/mp3', express.static('mp3'))
+app.use('/xml', express.static('xml'))
 
 app.listen(3002, function () {
   console.log('> Starting server...')
