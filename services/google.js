@@ -26,7 +26,7 @@ const Google = {
     this.request.input.text = message
     const xmlTemplate = `
       <Response>
-        <Play>https://prankstr.kmr.io/xml/${hash}.xml</Play>
+        <Play>https://prankstr.kmr.io/mp3/${hash}.mp3</Play>
       </Response>
     `
 
