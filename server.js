@@ -4,7 +4,7 @@ const express = require('express')
 const cors = require('cors')
 const history = require('connect-history-api-fallback')
 const rateLimit = require('express-rate-limit')
-const prankstr = require('./routes/prankstr.js')
+const api = require('./routes/api.js')
 
 const app = express()
 
@@ -19,13 +19,15 @@ app.use(express.json())
 app.use(cors())
 app.use(history())
 app.use(limiter)
-app.use(prankstr)
+
+// express routes
+app.use(api)
 
 // serve compiled vue app at http://localhost/
 app.use(express.static('app/dist'))
 
-app.listen(3010, function () {
-  console.log('> Starting prankster at...')
+app.listen(3000, function () {
+  console.log('> Starting server...')
   console.log('> Listening at http://localhost:' + this.address().port)
 })
 
