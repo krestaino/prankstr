@@ -24,9 +24,10 @@ app.use(limiter)
 app.use(api)
 
 // serve compiled vue app at http://localhost/
-app.use(express.static('app/dist'))
+app.use(express.static('mp3'))
+app.use(express.static('xml'))
 
-app.listen(3000, function () {
+app.listen(3002, function () {
   console.log('> Starting server...')
   console.log('> Listening at http://localhost:' + this.address().port)
 })
