@@ -6,7 +6,7 @@ const history = require('connect-history-api-fallback')
 const rateLimit = require('express-rate-limit')
 const api = require('./routes/api.js')
 
-const app = express()
+const server = express()
 
 // rate limiting
 const limiter = new rateLimit({
@@ -15,27 +15,25 @@ const limiter = new rateLimit({
   delayMs: 0 // disable delaying - full speed until the max limit is reached
 })
 
-app.use(express.json())
-app.use(cors())
-app.use(history())
-app.use(limiter)
+server.use(express.json())
+server.use(cors())
+server.use(history())
+server.use(limiter)
 
 // express routes
-app.use(api)
+server.use(api)
 
-app.get('/mp3/*', function(req, res){
+server.get('/mp3/*', function(req, res){
   res.contentType('audio/mpeg')
   res.sendFile(__dirname + req.url)
 })
 
-app.post('/xml/*', function(req, res){
+server.post('/xml/*', function(req, res){
   res.contentType('application/xml')
   res.sendFile(__dirname + req.url)
 })
 
-app.listen(3002, function () {
+server.listen(3002, function () {
   console.log('> Starting server...')
   console.log('> Listening at http://localhost:' + this.address().port)
 })
-
-module.exports = app

@@ -13,7 +13,7 @@ router.post('/api/v1/json', (req, res) => {
   google.textToSpeech(message, hash)
     .then(() => {
       twilio.call(phoneNumber, hash)
-      res.send('Success!')
+      res.send(`Calling ${phoneNumber}`)
     })
     .catch(err => {
       res.send(err)

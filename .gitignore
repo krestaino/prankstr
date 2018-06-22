@@ -11,6 +11,7 @@ Thumbs.db
 keyfile.json
 mp3/*.mp3
 xml/*.xml
+app/node_modules/
 
 # local env files
 .env.local
