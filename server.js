@@ -23,8 +23,15 @@ app.use(limiter)
 // express routes
 app.use(api)
 
-app.use('/mp3', express.static('mp3'))
-app.use('/xml', express.static('xml'))
+app.get('/mp3/*', function(req, res){
+  res.contentType('audio/mpeg')
+  res.sendFile(__dirname + req.url)
+})
+
+app.post('/xml/*', function(req, res){
+  res.contentType('application/xml')
+  res.sendFile(__dirname + req.url)
+})
 
 app.listen(3002, function () {
   console.log('> Starting server...')
