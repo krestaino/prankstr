@@ -24,11 +24,10 @@ const Google = {
   },
   textToSpeech (message, hash) {
     this.request.input.text = message
-    const xmlTemplate = `
-      <Response>
-        <Play>https://prankstr.kmr.io/mp3/${hash}.mp3</Play>
-      </Response>
-    `
+    const xmlTemplate = 
+`<Response>
+  <Play>https://prankstr.kmr.io/mp3/${hash}.mp3</Play>
+</Response>`
 
     return new Promise((resolve, reject) => {
       client.synthesizeSpeech(Google.request, (err, response) => {
