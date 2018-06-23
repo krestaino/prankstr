@@ -6,7 +6,7 @@
       <label>Message</label>
       <input type="text" v-model="message" required>
       <input
-        type="button"
+        type="submit"
         value="Call"
         @click.prevent="call"
       >
