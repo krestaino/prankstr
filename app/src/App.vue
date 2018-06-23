@@ -2,9 +2,18 @@
   <div id="app">
     <form>
       <label>Phone number</label>
-      <input type="text" v-model="phoneNumber" required>
+      <input
+        v-model="phoneNumber"
+        autofocus
+        required
+        type="text"
+      >
       <label>Message</label>
-      <input type="text" v-model="message" required>
+      <input
+        v-model="message"
+        required
+        type="text"
+      >
       <input
         type="submit"
         value="Call"
