@@ -8,7 +8,7 @@
       <input
         type="submit"
         value="Call"
-        @click.prevent="call"
+        @click="call"
       >
     </form>
     <div class="status">
