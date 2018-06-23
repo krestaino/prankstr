@@ -1,29 +1,39 @@
 <template>
-  <div id="app">
-    <form @submit.prevent="call">
-      <label>Phone number</label>
-      <input
-        v-model="phoneNumber"
-        autofocus
-        required
-        type="text"
-      >
-      <label>Message</label>
-      <input
-        v-model="message"
-        required
-        type="text"
-      >
-      <input type="submit" value="Call">
-    </form>
-    <div class="status">
-      <div v-if="response">
-        <div>{{ response.message }}</div>
-        <audio controls :src="`/mp3/${response.hash}.mp3`"></audio>
+  <el-container>
+    <el-main id="app">
+      <form @submit.prevent="call">
+        <i class="el-icon-phone"></i>
+        <el-row>
+          <el-input
+            v-model="phoneNumber"
+            autofocus
+            placeholder="Phone number"
+            required
+            type="text"
+          ></el-input>
+        </el-row>
+        <el-row>
+          <el-input
+            v-model="message"
+            placeholder="Message"
+            required
+            rows="5"
+            type="textarea"
+          ></el-input>
+        </el-row>
+        <el-row>
+          <el-button native-type type="primary">Call</el-button>
+        </el-row>
+      </form>
+      <div class="status">
+        <div v-if="response">
+          <div>{{ response.message }}</div>
+          <audio controls :src="`/mp3/${response.hash}.mp3`"></audio>
+        </div>
+        <div>{{ error }}</div>
       </div>
-      <div>{{ error }}</div>
-    </div>
-  </div>
+    </el-main>
+  </el-container>
 </template>
 
 <script>
@@ -57,46 +67,29 @@ export default {
 </script>
 
 <style lang="scss">
-#app {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  height: 100vh;
-  color: #2c3e50;
-  justify-content: center;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-form {
+.el-main {
+  margin: auto;
   max-width: 400px;
-  width: 100%;
-
-  label {
-    display: block;
-    margin-bottom: 0.5rem;
-
-    &:not(:first-child) {
-      margin-top: 1rem;
-    }
-  }
-
-  label,
-  input {
-    width: 100%;
-  }
-
-  input[type="submit"] {
-    margin-top: 1rem;
-  }
 }
 
-.status {
-  margin-top: 1rem;
+.el-icon-phone {
+  color: #888;
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
 
-  audio {
-    margin-top: 1rem;
-  }
+.el-row {
+  margin-bottom: 1rem;
+}
+
+.el-button {
+  width: 100%;
+}
+
+.el-textarea__inner {
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  font-size: 14px;
 }
 </style>

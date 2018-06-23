@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "element-ui": "^2.4.1",
+    "reset-css": "^4.0.1",
     "vue": "^2.5.16"
   },
   "devDependencies": {
