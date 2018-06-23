@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <form>
+    <form @submit.prevent="call">
       <label>Phone number</label>
       <input
         v-model="phoneNumber"
@@ -14,11 +14,7 @@
         required
         type="text"
       >
-      <input
-        type="submit"
-        value="Call"
-        @click="call"
-      >
+      <input type="submit" value="Call">
     </form>
     <div class="status">
       <div v-if="response">
