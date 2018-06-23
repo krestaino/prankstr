@@ -82,7 +82,7 @@ form {
     width: 100%;
   }
 
-  input[type="button"] {
+  input[type="submit"] {
     margin-top: 1rem;
   }
 }
