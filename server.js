@@ -23,6 +23,9 @@ server.use(limiter)
 // express routes
 server.use(api)
 
+// frontend vue app
+server.use(express.static('app/dist'))
+
 server.get('/mp3/*', function(req, res){
   res.contentType('audio/mpeg')
   res.sendFile(__dirname + req.url)
