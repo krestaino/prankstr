@@ -14,12 +14,16 @@ router.post('/api/v1/json', (req, res) => {
     .then(() => {
       twilio.call(phoneNumber, hash)
       res.send({
+        hash: hash,
         message: `Calling ${phoneNumber}`,
-        hash: hash
+        status: 'success'
       })
     })
     .catch(err => {
-      res.send(err)
+      res.send({
+        message: 'Something went wrong. Please try again.',
+        status: 'error'
+      })
     })
 })
 

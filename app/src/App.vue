@@ -2,7 +2,7 @@
   <el-container>
     <el-main id="app">
       <form @submit.prevent="call">
-        <i class="el-icon-phone"></i>
+        <img class="logo" src="@/assets/icons/phone.svg">
         <el-row>
           <el-input
             v-model="phoneNumber"
@@ -25,12 +25,17 @@
           <el-button native-type type="primary">Call</el-button>
         </el-row>
       </form>
-      <div class="status">
-        <div v-if="response">
-          <div>{{ response.message }}</div>
-          <audio controls :src="`/mp3/${response.hash}.mp3`"></audio>
+      <div class="status" v-loading="loading">
+        <el-alert
+          v-if="response.status"
+          center
+          :title="response.message"
+          :type="response.status"
+          show-icon>
+        </el-alert>
+        <div class="audio-player" :class="{ visible: response.status === 'success' }">
+          <audio :src="`/mp3/${response.hash}.mp3`"></audio>
         </div>
-        <div>{{ error }}</div>
       </div>
     </el-main>
   </el-container>
@@ -38,46 +43,71 @@
 
 <script>
 import axios from 'axios'
+import Plyr from 'plyr'
+import 'plyr/dist/plyr.css'
 
 export default {
   name: 'app',
   data () {
     return {
+      loading: false,
+      options: ['play', 'progress', 'current-time', 'mute', 'volume'],
       error: null,
       message: null,
       phoneNumber: null,
-      response: null
+      response: {
+        hash: null,
+        message: null,
+        status: null
+      }
     }
   },
   methods: {
     call () {
+      this.loading = true
+
       axios.post('/api/v1/json', {
         message: this.message,
         phoneNumber: this.phoneNumber
       })
         .then(response => {
-          this.response = response.data
+          this.loading = false
+          this.response.hash = response.data.hash
+          this.response.message = response.data.message
+          this.response.status = response.data.status
         })
-        .catch(error => {
-          this.error = error.data
+        .catch(() => {
+          this.loading = false
+          this.response.message = 'Something went wrong. Please try again.'
+          this.response.status = 'error'
         })
     }
+  },
+  mounted () {
+    // eslint-disable-next-line
+    new Plyr('audio', {
+      controls: ['play', 'progress', 'current-time', 'mute', 'volume']
+    })
   }
 }
 </script>
 
 <style lang="scss">
+$accent-color: #409EFF;
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
 .el-main {
   margin: auto;
   max-width: 400px;
 }
 
-.el-icon-phone {
-  color: #888;
+.logo {
   display: block;
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  text-align: center;
+  height: 2rem;
+  margin: 0 auto 1rem auto;
 }
 
 .el-row {
@@ -89,7 +119,23 @@ export default {
 }
 
 .el-textarea__inner {
-  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  font-family: inherit;
   font-size: 14px;
+}
+
+.audio-player {
+  visibility: hidden;
+
+  &.visible {
+    visibility: visible;
+  }
+}
+
+.plyr__control:hover {
+  background: $accent-color !important;
+}
+
+.plyr--full-ui input[type=range] {
+  color: $accent-color !important;
 }
 </style>
