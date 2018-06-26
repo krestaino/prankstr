@@ -8,7 +8,7 @@ git clone git@github.com:krestaino/prankstr.git
 cd prankstr
 npm install
 
-# setup environment variables (refer to .env.template)
+# setup environmental variables (refer to .env.template)
 touch .env
 echo "TWILIO_API=<STRING>" >> .env
 echo "TWILIO_SID=<STRING>" >> .env

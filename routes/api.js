@@ -3,7 +3,7 @@ const crypto = require('crypto')
 const express = require('express')
 const router = express.Router()
 
-// thrid party services
+// third party services
 const Google = require('../services/Google')
 const Twilio = require('../services/Twilio')
 const TwiML = require('../services/TwiML.js')
