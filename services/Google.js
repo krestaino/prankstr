@@ -36,7 +36,7 @@ const Google = {
 
     return new Promise((resolve, reject) => {
       // file exists, skipping text-to-speech
-      if (path.join(__dirname, `../mp3/${hash}.mp3`)) {
+      if (fs.existsSync(path.join(__dirname, `../mp3/${hash}.mp3`))) {
         resolve()
       }
 
