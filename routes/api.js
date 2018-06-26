@@ -2,17 +2,23 @@ const crypto = require('crypto')
 const express = require('express')
 const router = express.Router()
 
-const google = require('../services/google.js')
-const twilio = require('../services/twilio.js')
+const Google = require('../services/Google')
+const Twilio = require('../services/Twilio')
+const TwiML = require('../services/TwiML.js')
 
 router.post('/api/v1/json', (req, res) => {
   const message = req.body.message
   const phoneNumber = req.body.phoneNumber
   const hash = crypto.createHash('md5').update(message).digest('hex')
 
-  google.textToSpeech(message, hash)
+  Google.textToSpeech(message, hash)
     .then(() => {
-      twilio.call(phoneNumber, hash)
+      TwiML.build(hash)
+    })
+    .then(() => {
+      Twilio.call(phoneNumber, hash)
+    })
+    .then(() => {
       res.send({
         hash: hash,
         message: `Calling ${phoneNumber}`,
