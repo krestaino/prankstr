@@ -1,9 +1,11 @@
+// dependencies
 const builder = require('xmlbuilder')
 const fs = require('fs-extra')
 
 const TwiML = {
   create (hash) {
     return new Promise((resolve, reject) => {
+      // creates XML file for Twilio
       const xml = builder.create('Response')
         .ele('Pause', {'length': '1'})
         .up()

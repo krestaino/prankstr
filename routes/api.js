@@ -18,7 +18,7 @@ router.post('/api/v1/json', (req, res) => {
   // convert text-to-speech, returns promise
   Google.textToSpeech(message, hash)
     .then(() => {
-      // creates xml file for Twilio, returns promise
+      // creates XML file for Twilio, returns promise
       TwiML.create(hash)
     })
     .then(() => {
