@@ -23,7 +23,7 @@ server.use(limiter)
 // express routes
 server.use(api)
 
-// frontend vue app
+// serve built frontend vue app at http://localhost/
 server.use(express.static('app/dist'))
 
 server.get('/mp3/*', function(req, res){
@@ -36,7 +36,7 @@ server.post('/xml/*', function(req, res){
   res.sendFile(__dirname + req.url)
 })
 
-server.listen(3002, function () {
+server.listen(process.env.SERVER_PORT, function () {
   console.log('> Starting server...')
   console.log('> Listening at http://localhost:' + this.address().port)
 })

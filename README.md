@@ -8,19 +8,21 @@ git clone git@github.com:krestaino/prankstr.git
 cd prankstr
 npm install
 
-# setup environment variables for Twilio and Google API's
+# setup environment variables (refer to .env.template)
 touch .env
-echo "TWILIO_API=KEY_GOES_HERE" >> .env
-echo "GOOGLE_API=KEY_GOES_HERE" >> .env
+echo "TWILIO_API=<STRING>" >> .env
+echo "TWILIO_SID=<STRING>" >> .env
+echo "TWILIO_PHONE=<NUMBER>" >> .env
+echo "SERVER_PORT=<NUMBER>" >> .env
 
 # install vue app dependencies
 cd app
 npm install
 
-# build vue app
+# build frontend vue app
 npm run build
 
-# start express server at localhost:3000
+# start express server at localhost:<SERVER_PORT>
 cd ../
 npm start
 ```
