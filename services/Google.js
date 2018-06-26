@@ -5,6 +5,7 @@ const path = require('path')
 const textToSpeech = require('@google-cloud/text-to-speech')
 
 // import Google Cloud API service credentials
+// https://cloud.google.com/docs/authentication/getting-started
 // https://console.cloud.google.com/iam-admin/serviceaccounts/project
 // export the key as JSON and rename the file to `keyfile.json`
 const config = {
