@@ -75,7 +75,7 @@ export default {
         status: null
       }
 
-      axios.post('http://localhost:3002/api/v1/json', {
+      axios.post('/api/v1/json', {
         message: this.message,
         phoneNumber: this.phoneNumber
       })
