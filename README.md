@@ -14,12 +14,13 @@ echo "TWILIO_API=<STRING>" >> .env
 echo "TWILIO_SID=<STRING>" >> .env
 echo "TWILIO_PHONE=<NUMBER>" >> .env
 echo "SERVER_PORT=<NUMBER>" >> .env
+echo "APP_URL=<STRING>" >> .env
 
-# install vue app dependencies
+# install frontend app dependencies
 cd app
 npm install
 
-# build frontend vue app
+# build frontend app
 npm run build
 
 # start express server at localhost:<SERVER_PORT>
