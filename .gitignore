@@ -10,6 +10,7 @@ Thumbs.db
 .env
 keyfile.json
 mp3/*.mp3
+!mp3/null.mp3
 xml/*.xml
 app/node_modules/
 

@@ -2,7 +2,7 @@ const builder = require('xmlbuilder')
 const fs = require('fs-extra')
 
 const TwiML = {
-  build (hash) {
+  create (hash) {
     return new Promise((resolve, reject) => {
       const xml = builder.create('Response')
         .ele('Pause', {'length': '1'})
