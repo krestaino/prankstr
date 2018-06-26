@@ -26,16 +26,20 @@
         </el-row>
       </form>
       <div class="status" v-loading="loading">
-        <el-alert
-          v-if="response.status"
-          center
-          :title="response.message"
-          :type="response.status"
-          show-icon>
-        </el-alert>
-        <div class="audio-player" :class="{ visible: response.status === 'success' }">
-          <audio :src="`/mp3/${response.hash}.mp3`"></audio>
-        </div>
+        <el-row>
+          <div class="audio-player" :class="{ visible: response.status === 'success' }">
+            <audio :src="`/mp3/${response.hash}.mp3`"></audio>
+          </div>
+        </el-row>
+        <el-row>
+          <el-alert
+            v-if="response.status"
+            center
+            :title="response.message"
+            :type="response.status"
+            show-icon>
+          </el-alert>
+        </el-row>
       </div>
     </el-main>
   </el-container>
@@ -65,28 +69,37 @@ export default {
   methods: {
     call () {
       this.loading = true
+      this.response = {
+        hash: null,
+        message: null,
+        status: null
+      }
 
-      axios.post('/api/v1/json', {
+      axios.post('http://localhost:3002/api/v1/json', {
         message: this.message,
         phoneNumber: this.phoneNumber
       })
         .then(response => {
-          this.loading = false
-          this.response.hash = response.data.hash
-          this.response.message = response.data.message
-          this.response.status = response.data.status
+          setTimeout(() => {
+            this.loading = false
+            this.response.hash = response.data.hash
+            this.response.message = response.data.message
+            this.response.status = response.data.status
+          }, 666)
         })
         .catch(() => {
-          this.loading = false
-          this.response.message = 'Something went wrong. Please try again.'
-          this.response.status = 'error'
+          setTimeout(() => {
+            this.loading = false
+            this.response.message = 'Something went wrong. Please try again.'
+            this.response.status = 'error'
+          }, 666)
         })
     }
   },
   mounted () {
     // eslint-disable-next-line
     new Plyr('audio', {
-      controls: ['play', 'progress', 'current-time', 'mute', 'volume']
+      controls: this.options
     })
   }
 }
