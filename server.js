@@ -43,7 +43,7 @@ server.post('/xml/*', (req, res) => {
 })
 
 // start server
-server.listen(process.env.SERVER_PORT, function () {
+server.listen(process.env.SERVER_PORT, () => {
   console.log('> Starting server...')
-  console.log('> Listening at http://localhost:' + this.address().port)
+  console.log('> Listening at http://localhost:' + process.env.SERVER_PORT)
 })
