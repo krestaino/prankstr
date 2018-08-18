@@ -24,7 +24,7 @@ const limiter = new rateLimit({
 const authMiddleware = auth.connect(auth.basic({
   realm: 'Home'
 }, (username, password, callback) => {
-  callback(username == '' && password == '803115227')
+  callback(username == '' && password == process.env.PASSWORD)
 }))
 
 // extending express server functionality
