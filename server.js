@@ -2,8 +2,9 @@
 require('dotenv').config()
 
 // dependencies
-const express = require('express')
+const auth = require('http-auth')
 const cors = require('cors')
+const express = require('express')
 const rateLimit = require('express-rate-limit')
 
 // routes
@@ -19,6 +20,13 @@ const limiter = new rateLimit({
   delayMs: 0 // full speed until the max limit is reached
 })
 
+// basic auth
+const authMiddleware = auth.connect(auth.basic({
+  realm: 'Home'
+}, (username, password, callback) => {
+  callback(username == '' && password == '803115227')
+}))
+
 // extending express server functionality
 server.use(express.json())
 server.use(cors())
@@ -26,9 +34,6 @@ server.use(limiter)
 
 // express routes
 server.use(api)
-
-// serve built frontend vue app at http://localhost/
-server.use(express.static('app/dist'))
 
 // serve MP3 files
 server.get('/mp3/*', (req, res) => {
@@ -41,6 +46,9 @@ server.post('/xml/*', (req, res) => {
   res.contentType('application/xml')
   res.sendFile(__dirname + req.url)
 })
+
+// serve built frontend vue app at http://localhost/
+server.use( '/', [ authMiddleware, express.static('app/dist') ] )
 
 // start server
 server.listen(process.env.SERVER_PORT, () => {
